@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="listaTelefonica">
+<head>
+	<meta charset="UTF-8">
+	<title>Lista Telefônica</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body ng-controller="listaTelefonicaCtrl">
+	<div class="jumbotron text-center">
+		<h4 class="text-center">{{app}}</h4>
+		<table class="table table-striped">
+			<tr>
+				<th>Nome</th>
+				<th>Telefone</th>
+			</tr>
+			<tr ng-repeat="contato in contatos">
+				<td>{{contato.nome}}</td>
+				<td>{{contato.telefone}}</td>
+			</tr>
+		</table>
+		<hr>
+		<input class="form-control" type="text" ng-model="contato.nome">
+		<input class="form-control" type="text" ng-model="contato.telefone">
+		<button class="btn btn-primary btn-block mt-3" ng-click="adicionarContato(contato)">Adicionar Contato</button>
+	</div>
+									<!-- Script -->
+	<script src="js/angular.js"></script>
+	<script>
+		angular.module('listaTelefonica', []);
+		angular.module('listaTelefonica', []).controller('listaTelefonicaCtrl', function($scope) {
+			$scope.app = 'Lista Telefônica';
+			$scope.contatos = [
+				{nome: "Pedro", telefone: "15987468844"},
+				{nome: "Ana", telefone: "15987234423"},
+				{nome: "João", telefone: "15987283844"}
+			];
+			$scope.adicionarContato = function (contato) {
+				$scope.contatos.push(contato);
+				delete $scope.contato;	
+			};
+		});
+	</script>	
+</body>
+</html>
